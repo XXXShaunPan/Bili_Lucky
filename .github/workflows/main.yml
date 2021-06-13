@@ -44,7 +44,7 @@ jobs:
 #       直接判断执行条件
       if: github.event_name != 'workflow_dispatch'                   
       run: |
-        python3 follow.py
+        python3 follow.py >> users_lucky.log
       
 #     - name: 获取指定数据
 #       if: github.event_name == 'workflow_dispatch'
