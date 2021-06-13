@@ -5,7 +5,7 @@ import re
 from time import strftime, localtime
 # from lxml import etree
 
-csrf='b37e3ce8200b38733b8f6d5162c72e2f'
+csrf='4e3b91ae62ff1d5aba40e9f955521f4b'
 
 today=time.strftime('%Y-%m-%d',time.localtime())
 today_filename=time.strftime('%Y-%m-%d=%H',time.localtime())
@@ -14,7 +14,7 @@ today_list=[]
 
 header={
 	'content-type':'application/x-www-form-urlencoded',
-	'cookie':"l=v; _uuid=3E0FD1B0-BD00-372B-A085-C740290C537805644infoc; buvid3=4781CB6D-5DC8-40B0-BCBA-E1D326F9CF5213427infoc; fingerprint=7cf60d61391a1f44914257ce1ac7b467; buvid_fp=4781CB6D-5DC8-40B0-BCBA-E1D326F9CF5213427infoc; buvid_fp_plain=4781CB6D-5DC8-40B0-BCBA-E1D326F9CF5213427infoc; SESSDATA=06b41d08%2C1635249028%2C36036%2A41; bili_jct=b37e3ce8200b38733b8f6d5162c72e2f; DedeUserID=32993113; DedeUserID__ckMd5=4fc3255f3996c38a; sid=jbouhmkn; PVID=1",
+	'cookie':"_uuid=30B8CE79-49BF-F3AD-03DA-178807A753D060817infoc; buvid3=145A68BF-BABD-4BD8-925B-9A546BA1486034772infoc; fingerprint=2c6eecf15a9f51ad1b944aef5cd44e08; buvid_fp=145A68BF-BABD-4BD8-925B-9A546BA1486034772infoc; buvid_fp_plain=145A68BF-BABD-4BD8-925B-9A546BA1486034772infoc; SESSDATA=784e4c2a%2C1639149385%2C53363%2A61; bili_jct=4e3b91ae62ff1d5aba40e9f955521f4b; DedeUserID=1090970340; DedeUserID__ckMd5=aae500216002dd45; sid=7ehp06q6; CURRENT_FNVAL=80; blackside_state=1; rpdid=|(k|u)kYuJ~)0J'uYkJlm~lJk; bp_video_offset_1090970340=535805287664274217; bp_t_offset_1090970340=535859945424836104; PVID=1; bfe_id=61a513175dc1ae8854a560f6b82b37af",
 	'origin':'https://t.bilibili.com',
 	'pragma':'no-cache',
 	'referer':'https://t.bilibili.com/',
@@ -41,7 +41,7 @@ data_follow={
 
 
 data_repost={
-	'uid':'32993113',
+	'uid':'1090970340',
 	'dynamic_id':'',
 	'content':'我觉得会是我~！',
 	'extension':'{"emoji_type":1}',
@@ -62,7 +62,7 @@ data_comment={
 }
 
 data_thumbsUp={
-	'uid':'32993113',
+	'uid':'1090970340',
 	'dynamic_id':'',
 	'up':'1',
 	'csrf_token':csrf,
