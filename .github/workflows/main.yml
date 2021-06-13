@@ -38,7 +38,7 @@ jobs:
       run: |
         pip install -r requirements.txt
         
-    - name: 抓取OB里的粉丝数据
+    - name: 开始转发抽奖动态
 #       判断types方式
       # if: github.event.action != 'started'
 #       直接判断执行条件
@@ -88,16 +88,16 @@ jobs:
 #         # black_list: 'repo_name,repo_name2'
 #         # white_list: 'repo_name,repo_name2'      
 
-    - name: 'Send mail'
-      if: success()
-      uses: dawidd6/action-send-mail@master
-      with:
-        server_address: smtp.qq.com
-        server_port: 465
-        username: ${{ secrets.MAIL_USERNAME }}
-        password: ${{ secrets.MAIL_PASSWORD }}
-        subject: "bili_fans_ob项目push成功通知"
-        body: "OB涨掉粉榜爬取完成！"
-        to: 630077372@qq.com
-        from: OB_fans
-        content_type: text/plain
+#     - name: 'Send mail'
+#       if: success()
+#       uses: dawidd6/action-send-mail@master
+#       with:
+#         server_address: smtp.qq.com
+#         server_port: 465
+#         username: ${{ secrets.MAIL_USERNAME }}
+#         password: ${{ secrets.MAIL_PASSWORD }}
+#         subject: "bili_fans_ob项目push成功通知"
+#         body: "OB涨掉粉榜爬取完成！"
+#         to: 630077372@qq.com
+#         from: OB_fans
+#         content_type: text/plain
