@@ -1,7 +1,7 @@
 #coding=utf-8
 import requests as rq
 import random,time,dynamic_redis
-import tuling,reply,json
+import json
 from time import strftime, localtime
 #628290540 #
 mids=[382447165]	# 受害用户的ID（获取抽奖动态）
