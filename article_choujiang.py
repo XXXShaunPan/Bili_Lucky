@@ -198,7 +198,7 @@ def main():
 	if article_id:
 		dys=parse_article_get_dy(article_id)
 	else:
-		dys=action()
+		return
 	for i in dys:
 		try:
 			print(i)
