@@ -90,10 +90,13 @@ def to_follow(uid):
 def to_repost(dynamic_id):
 	data_repost['dynamic_id']=dynamic_id
 	# data_repost['content']=tuling.get_response(random.choice(['啦啦啦','嘻嘻嘻','嘿嘿嘿']))
-	res=spider_post("https://api.vc.bilibili.com/dynamic_repost/v1/dynamic_repost/repost",data_repost)
+	res=spider_post("https://api.vc.bilibili.com/dynamic_repost/v1/dynamic_repost/repost",data_repost
+	time.sleep(2)
 	if res['code']==0:
 		print("转发成功")
-
+		return 1
+	return 0
+		
 
 def to_comment(oid):
 	# 需要获取动态的oid，才能发送评论
@@ -102,6 +105,10 @@ def to_comment(oid):
 	data_comment.update({"oid":oid})
 	res=spider_post("https://api.bilibili.com/x/v2/reply/add",data_comment)
 	print("评论"+res['data']['success_toast'])
+	time.sleep(2)
+	if res['data']['success_toast']:
+		return 1
+	return 0
 
 
 def to_rm_dynamic(dynamic_id):
@@ -128,16 +135,11 @@ def check_dynamic_id():
 
 def main_follow_and_post(uid='',dynamic_id='',oid=""):
 	time.sleep(5)
-	if uid:
+	if to_comment(oid) and to_repost(dynamic_id):
 		to_follow(uid)
 		time.sleep(0.5)
-	if dynamic_id and oid:
 		dynamic_redis.save_dynamic(dynamic_id)
 		to_thumbsUp(dynamic_id)
-		time.sleep(3)
-		to_comment(oid)
-		time.sleep(0.5)
-		to_repost(dynamic_id)
 
 
 def main(mid):
