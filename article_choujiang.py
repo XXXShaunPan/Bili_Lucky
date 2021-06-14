@@ -238,9 +238,9 @@ def main():
 
 already_dynamic_id=check_dynamic_id()
 if __name__ == '__main__':
-	print("\n\n==============="+time.strftime('%Y-%m-%d %H:%M',time.localtime())+"===============")
+	print("\n\n==============="+datetime.now(timezone('Asia/Shanghai')).strftime('%Y-%m-%d %H:%M')+"===============")
 	main()
-	print("==============="+time.strftime('%Y-%m-%d %H:%M',time.localtime())+"===============")
+	print("==============="+datetime.now(timezone('Asia/Shanghai')).strftime('%Y-%m-%d %H:%M')+"===============")
 	if today_list:
 		with open(f'List/{today_filename}.txt', 'w') as f:
 			f.write('=='.join(today_list))
