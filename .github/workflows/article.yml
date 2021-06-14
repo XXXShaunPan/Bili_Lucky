@@ -9,16 +9,12 @@ on:
     - cron: "0 0-23/2 * * *"
   watch:
     types: started
-#   workflow_dispatch:
-#     inputs:
-#       fans_type:
-#         description: '涨粉榜？ (空down 1up)'
-#         required: false
-#         default: ''
-#       date_start:
-#         description: '开始时间 (如03 01 09)'
-#         required: true
-#         default: ''
+  workflow_dispatch:
+    inputs:
+      article_id:
+        description: '文章ID'
+        required: false
+        default: ''
     
   
 jobs:
@@ -42,7 +38,9 @@ jobs:
 #       判断types方式
       # if: github.event.action != 'started'
 #       直接判断执行条件
-      if: github.event_name != 'workflow_dispatch'                   
+#       if: github.event_name != 'workflow_dispatch'  
+      env:
+        article_id: ${{ github.event.inputs.article_id }}
       run: |
         python3 article_choujiang.py >> articles_lucky.log
       
