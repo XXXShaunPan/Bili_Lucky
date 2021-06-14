@@ -90,7 +90,7 @@ def to_follow(uid):
 def to_repost(dynamic_id):
 	data_repost['dynamic_id']=dynamic_id
 	# data_repost['content']=tuling.get_response(random.choice(['啦啦啦','嘻嘻嘻','嘿嘿嘿']))
-	res=spider_post("https://api.vc.bilibili.com/dynamic_repost/v1/dynamic_repost/repost",data_repost
+	res=spider_post("https://api.vc.bilibili.com/dynamic_repost/v1/dynamic_repost/repost",data_repost)
 	time.sleep(2)
 	if res['code']==0:
 		print("转发成功")
