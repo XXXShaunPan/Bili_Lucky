@@ -11,8 +11,8 @@ csrf='4e3b91ae62ff1d5aba40e9f955521f4b'
 
 article_id=os.environ["article_id"]
 
-today=time=datetime.now(timezone('Asia/Shanghai')).strftime('%Y-%m-%d')
-today_filename=time=datetime.now(timezone('Asia/Shanghai')).strftime('%Y-%m-%d=%H')
+today=datetime.now(timezone('Asia/Shanghai')).strftime('%Y-%m-%d')
+today_filename=datetime.now(timezone('Asia/Shanghai')).strftime('%Y-%m-%d=%H')
 
 official_list=[]
 today_list=[]
