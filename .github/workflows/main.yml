@@ -19,7 +19,10 @@ on:
 #         description: '开始时间 (如03 01 09)'
 #         required: true
 #         default: ''
-    
+
+env:
+  Redis_psw: ${{ secrets.Redis_psw }}
+  Redis_IP: ${{ secrets.Redis_IP }}    
   
 jobs:
   build:
@@ -57,13 +60,13 @@ jobs:
 #         tar -zcvf temp.tar.gz temp/
         
         
-    - name: 上传
-      run: |
-        git config --local user.email "19820637553@163.com"
-        git config --local user.name "XXXShaunPan"
-        git add .
-        git commit -m "`date '+%Y-%m-%d %H:%M:%S'`"
-        git push -u origin main && echo "push ok"
+#     - name: 上传
+#       run: |
+#         git config --local user.email "19820637553@163.com"
+#         git config --local user.name "XXXShaunPan"
+#         git add .
+#         git commit -m "`date '+%Y-%m-%d %H:%M:%S'`"
+#         git push -u origin main && echo "push ok"
         
         
 #     - name: sync github -> gitee
