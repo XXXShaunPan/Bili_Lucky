@@ -2,16 +2,19 @@ import requests as rq
 import random,time,dynamic_redis
 import json
 import re,os
-from time import strftime, localtime
+from functools import reduce
+from datetime import datetime
+from pytz import timezone
 # from lxml import etree
 
 csrf='4e3b91ae62ff1d5aba40e9f955521f4b'
 
 article_id=os.environ["article_id"]
 
-today=time.strftime('%Y-%m-%d',time.localtime())
-today_filename=time.strftime('%Y-%m-%d=%H',time.localtime())
+today=time=datetime.now(timezone('Asia/Shanghai')).strftime('%Y-%m-%d')
+today_filename=time=datetime.now(timezone('Asia/Shanghai')).strftime('%Y-%m-%d=%H')
 
+official_list=[]
 today_list=[]
 
 header={
@@ -71,6 +74,8 @@ data_thumbsUp={
 	'csrf':csrf,
 }
 
+func = lambda x,y:x if y in x else x + [y]  
+
 def spider_post(url,data1):
 	# asyncio.sleep(3)
 	res=rq.post(url,headers=header,data=data1)
@@ -80,13 +85,15 @@ def spider_post(url,data1):
 def parse_article_get_dy(article_id):
 	res=rq.get(f'https://www.bilibili.com/read/cv{article_id}',headers=header_noCookie).text
 
-	result=re.findall('https://t.bilibili.com/.+?tab=2',res)
+	result=re.findall('https://t.bilibili.com/(.+?)\?tab=2',res)
+
+	result = reduce(func,[[]]+result)
 
 	return parse_dynamic(result)
 
 
 def parse_dynamic(result):
-	if order_dy_type(result[2].split('com/')[1].split('?')[0]):
+	if order_dy_type(result[2]):
 		result.reverse()
 	return result
 
@@ -198,18 +205,21 @@ def main():
 	if article_id:
 		dys=parse_article_get_dy(article_id)
 	else:
-		return
-	for i in dys:
+		action()
+	for dy_id in dys:
 		try:
-			print(i)
-			dy_id=i.split('com/')[1].split('?')[0]
+			print('https://t.bilibili.com/',dy_id)
 			if dy_id in already_dynamic_id:
 				print("已有")
 				continue
 			get_comment_word(dy_id)
 			result=get_uid_oid(dy_id)
 			if result==1: # 到官方抽奖了
-				break
+				official_list.append(dy_id)
+				print("官方抽奖")
+				if len(official_list)>5:
+					break
+				continue
 			if not result:
 				print('*#*#*#*#*#*#*#*#*#*原动态处理失败*#*#*#*#*#*#*#*#*#')
 				continue
