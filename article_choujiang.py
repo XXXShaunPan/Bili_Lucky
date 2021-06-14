@@ -1,11 +1,13 @@
 import requests as rq
 import random,time,dynamic_redis
 import json
-import re
+import re,os
 from time import strftime, localtime
 # from lxml import etree
 
 csrf='4e3b91ae62ff1d5aba40e9f955521f4b'
+
+article_id=os.environ["article_id"]
 
 today=time.strftime('%Y-%m-%d',time.localtime())
 today_filename=time.strftime('%Y-%m-%d=%H',time.localtime())
@@ -193,7 +195,11 @@ def check_dynamic_id():
 
 
 def main():
-	for i in action():
+	if article_id:
+		dys=parse_article_get_dy(article_id)
+	else:
+		dys=action()
+	for i in dys:
 		try:
 			print(i)
 			dy_id=i.split('com/')[1].split('?')[0]
