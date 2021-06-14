@@ -12,7 +12,7 @@ def save_official_lucky(official_lucky):
 
 
 def get_dynamic():
-	res=rd.lrange("already_dynamic_id-2", 0, -1)
+	res=rd.lrange("already_dynamic_id-2", 0, 3000)
 	return list(map(lambda x:str(x,encoding='utf-8'),res))
 
 # print(get_dynamic())
