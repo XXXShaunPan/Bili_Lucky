@@ -205,7 +205,7 @@ def main():
 	if article_id:
 		dys=parse_article_get_dy(article_id)
 	else:
-		action()
+		dys=action()
 	for dy_id in dys:
 		try:
 			print('https://t.bilibili.com/',dy_id)
