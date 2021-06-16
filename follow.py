@@ -5,11 +5,11 @@ import json
 from time import strftime, localtime
 #628290540 #
 mids=[382447165,1938824,386037883,695554003,670582019,1814607988,427535591,1261444445,241675899,1161955340,487657530,481705501,693517324,483064954]	# 受害用户的ID（获取抽奖动态）
-csrf='4e3b91ae62ff1d5aba40e9f955521f4b'
+csrf='b7b97513b512cd98b0595418fc5f140f'
 key_list=['抽','奖','送']
 header={
 	'content-type':'application/x-www-form-urlencoded',
-	'cookie':"_uuid=30B8CE79-49BF-F3AD-03DA-178807A753D060817infoc; buvid3=145A68BF-BABD-4BD8-925B-9A546BA1486034772infoc; bfe_id=6f285c892d9d3c1f8f020adad8bed553; fingerprint=2c6eecf15a9f51ad1b944aef5cd44e08; buvid_fp=145A68BF-BABD-4BD8-925B-9A546BA1486034772infoc; buvid_fp_plain=145A68BF-BABD-4BD8-925B-9A546BA1486034772infoc; SESSDATA=784e4c2a%2C1639149385%2C53363%2A61; bili_jct=4e3b91ae62ff1d5aba40e9f955521f4b; DedeUserID=1090970340; DedeUserID__ckMd5=aae500216002dd45; sid=7ehp06q6; CURRENT_FNVAL=80; blackside_state=1; rpdid=|(k|u)kYuJ~)0J'uYkJlm~lJk",
+	'cookie':"_uuid=30B8CE79-49BF-F3AD-03DA-178807A753D060817infoc; buvid3=145A68BF-BABD-4BD8-925B-9A546BA1486034772infoc; fingerprint=2c6eecf15a9f51ad1b944aef5cd44e08; buvid_fp=145A68BF-BABD-4BD8-925B-9A546BA1486034772infoc; buvid_fp_plain=145A68BF-BABD-4BD8-925B-9A546BA1486034772infoc; CURRENT_FNVAL=80; blackside_state=1; rpdid=|(k|u)kYuJ~)0J'uYkJlm~lJk; bp_video_offset_1090970340=535805287664274217; bp_t_offset_1090970340=535859945424836104; PVID=1; SESSDATA=ef71062d%2C1639292801%2C06249%2A61; bili_jct=b7b97513b512cd98b0595418fc5f140f; DedeUserID=1090970340; DedeUserID__ckMd5=aae500216002dd45; sid=jmr3fj8t",
 	'origin':'https://t.bilibili.com',
 	'pragma':'no-cache',
 	'referer':'https://t.bilibili.com/',
