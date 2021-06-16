@@ -83,6 +83,8 @@ def spider_post(url,data1):
 	return html
 
 def parse_article_get_dy(article_id):
+	if not article_id:
+		return []
 	res=rq.get(f'https://www.bilibili.com/read/cv{article_id}',headers=header_noCookie).text
 
 	result=re.findall('https://t.bilibili.com/(.+?)\?tab=2',res)
