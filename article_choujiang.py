@@ -7,7 +7,7 @@ from datetime import datetime
 from pytz import timezone
 # from lxml import etree
 
-csrf=os.environ["R"]
+csrf=os.environ["CSRF"]
 
 article_id=os.environ["article_id"]
 
