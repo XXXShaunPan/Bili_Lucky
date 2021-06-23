@@ -1,15 +1,15 @@
 #coding=utf-8
 import requests as rq
 import random,time,dynamic_redis
-import json
+import json,os
 from time import strftime, localtime
 #628290540 #
 mids=[382447165,1938824,386037883,695554003,670582019,1814607988,427535591,1261444445,241675899,1161955340,487657530,481705501,693517324,483064954]	# 受害用户的ID（获取抽奖动态）
-csrf='b7b97513b512cd98b0595418fc5f140f'
+csrf=os.environ["R"]
 key_list=['抽','奖','送']
 header={
 	'content-type':'application/x-www-form-urlencoded',
-	'cookie':"_uuid=30B8CE79-49BF-F3AD-03DA-178807A753D060817infoc; buvid3=145A68BF-BABD-4BD8-925B-9A546BA1486034772infoc; fingerprint=2c6eecf15a9f51ad1b944aef5cd44e08; buvid_fp=145A68BF-BABD-4BD8-925B-9A546BA1486034772infoc; buvid_fp_plain=145A68BF-BABD-4BD8-925B-9A546BA1486034772infoc; CURRENT_FNVAL=80; blackside_state=1; rpdid=|(k|u)kYuJ~)0J'uYkJlm~lJk; bp_video_offset_1090970340=535805287664274217; bp_t_offset_1090970340=535859945424836104; PVID=1; SESSDATA=ef71062d%2C1639292801%2C06249%2A61; bili_jct=b7b97513b512cd98b0595418fc5f140f; DedeUserID=1090970340; DedeUserID__ckMd5=aae500216002dd45; sid=jmr3fj8t",
+	'cookie':os.environ["BILI_COOKIE"],
 	'origin':'https://t.bilibili.com',
 	'pragma':'no-cache',
 	'referer':'https://t.bilibili.com/',
