@@ -23,7 +23,9 @@ on:
 env:
   Redis_psw: ${{ secrets.Redis_psw }}
   Redis_IP: ${{ secrets.Redis_IP }}    
-  
+  CSRF: ${{ secrets.CSRF }}
+  BILI_COOKIE: ${{ secrets.BILI_COOKIE }}
+
 jobs:
   build:
     runs-on: ubuntu-latest
