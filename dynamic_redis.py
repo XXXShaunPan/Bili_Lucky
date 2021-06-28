@@ -19,7 +19,7 @@ def save_official_lucky(official_lucky):
 
 def get_dynamic(filename='dy_id1.txt'):
 	with open(filename,'r',encoding='utf-8') as f:
-		return f.read()
+		return f.read().split('\n')
 # 	res=rd.lrange("already_dynamic_id-2", 0, 3000)
 # 	return list(map(lambda x:str(x,encoding='utf-8'),res))
 
