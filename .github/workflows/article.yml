@@ -1,12 +1,12 @@
 name: get_articles_lucky
 
 on:
-#   push:
-#     branches: [ master ]
-#   pull_request:
-#     branches: [ master ]
-#   schedule:
-#     - cron: "30 23,1,4,7,10,13,15 * * *"
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+  schedule:
+    - cron: "30 23,1,4,7,10,13,15 * * *"
   watch:
     types: started
   workflow_dispatch:
