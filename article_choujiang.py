@@ -46,7 +46,7 @@ data_follow={
 
 
 data_repost={
-	'uid':'1090970340',
+	'uid':'32993113',
 	'dynamic_id':'',
 	'content':'我觉得会是我~！',
 	'extension':'{"emoji_type":1}',
@@ -67,7 +67,7 @@ data_comment={
 }
 
 data_thumbsUp={
-	'uid':'1090970340',
+	'uid':'32993113',
 	'dynamic_id':'',
 	'up':'1',
 	'csrf_token':csrf,
