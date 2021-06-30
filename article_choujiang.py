@@ -109,6 +109,7 @@ def action():
 	article_id=''
 	articles=rq.get("https://api.bilibili.com/x/space/article?mid=226257459&pn=1&ps=12&sort=publish_time",headers=header_noCookie).json()['data']['articles']
 	for i in articles:
+		print('这里')
 		if "抽奖" in i['title'] and time.strftime('%Y-%m-%d',time.localtime(i['publish_time']))==today:
 			article_id=i['id']
 			break
@@ -226,6 +227,7 @@ def check_dynamic_id():
 def main():
 	if article_id:
 		dys=parse_article_get_dy(article_id)
+		print('没给定id')
 	else:
 		dys=action()
 	for dy_id in dys:
