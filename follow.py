@@ -165,6 +165,7 @@ def main(mid):
 			data_repost['content']=poem
 			data_comment['message']=poem
 			print("="*30)
+			print(per_dynamic['dynamic_id_str'])
 			main_follow_and_post(str(per_dynamic['uid']),per_dynamic['dynamic_id_str'],per_dynamic['rid_str'])
 			already_dynamic_id.append(per_dynamic['dynamic_id_str'])
 			print("="*30)
