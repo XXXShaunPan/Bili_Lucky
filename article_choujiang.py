@@ -7,8 +7,6 @@ from datetime import datetime
 from pytz import timezone
 # from lxml import etree
 
-my_uid='32993113'
-
 csrf=os.environ["CSRF"]
 
 article_id=os.environ["article_id"]
@@ -50,7 +48,7 @@ data_follow={
 
 
 data_repost={
-	'uid':my_uid,
+	'uid':'32993113',
 	'dynamic_id':'',
 	'content':'我觉得会是我~！',
 	'extension':'{"emoji_type":1}',
@@ -71,7 +69,7 @@ data_comment={
 }
 
 data_thumbsUp={
-	'uid':my_uid,
+	'uid':'32993113',
 	'dynamic_id':'',
 	'up':'1',
 	'csrf_token':csrf,
