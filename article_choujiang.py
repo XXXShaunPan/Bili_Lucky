@@ -7,12 +7,6 @@ from datetime import datetime
 from pytz import timezone
 # from lxml import etree
 
-csrf=os.environ["CSRF"]
-
-article_id=os.environ["article_id"]
-
-article_uid=os.environ["Artice_Uid"]
-
 today=datetime.now(timezone('Asia/Shanghai')).strftime('%Y-%m-%d')
 today_filename=datetime.now(timezone('Asia/Shanghai')).strftime('%Y-%m-%d=%H')
 
@@ -75,6 +69,12 @@ data_thumbsUp={
 	'csrf_token':csrf,
 	'csrf':csrf,
 }
+
+csrf=os.environ["CSRF"]
+
+article_id=os.environ["article_id"]
+
+article_uid=os.environ["Artice_Uid"]
 
 get_son_dy_url=lambda x:f'https://api.vc.bilibili.com/dynamic_repost/v1/dynamic_repost/repost_detail?dynamic_id={x}'
 
