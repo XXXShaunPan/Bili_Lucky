@@ -120,11 +120,14 @@ def action():
 	return parse_article_get_dy(article_id)
 
 
-def get_comment_word(dy_id):
+def get_comment_word(dy_id,not_origin=1):
 	repost_detail=rq.get(f'https://api.vc.bilibili.com/dynamic_repost/v1/dynamic_repost/repost_detail?dynamic_id={dy_id}').json()
 	word=json.loads(repost_detail['data']['items'][-1]['card'])['item']['content']
-	data_comment['message']=word.split('//')[0] if word.split('//')[0] else '来了'
-	data_repost['content']=word  
+	data_comment['message']=word.split('//')[0] if word.split('//')[0]!='转发动态' and word.split('//')[0]!='' else '来了'
+	if not not_origin:  # 是为源动态
+		data_repost['content']=data_comment['message']
+	else:
+		data_repost['content']=word
 
 
 def get_uid_oid(dy_id):
@@ -135,6 +138,7 @@ def get_uid_oid(dy_id):
 		return 1
 	# print(keys)
 	if 'origin' in keys.keys():
+		get_comment_word(keys['origin']['dynamic_id'],0)
 		if not parse_origin_dy(keys['origin']):
 			return 0
 	return keys['uid'],keys['rid'],keys['user_profile']['info']['uname'], int(keys['orig_dy_id_str'])
@@ -148,13 +152,13 @@ def get_son_lucky_dy(dy_id):
 		i=json.loads(j['card'])
 		if all([key in i['item']['content'] for key in ['关注','抽']]) and '//' not in i['item']['content']:
 			son_dy_id=j['desc']['dynamic_id']
-			if son_dy_id not in already_dynamic_id:		
+			if son_dy_id not in already_dynamic_id:	
 				get_comment_word(son_dy_id)
-				to_comment(1,son_dy_id,True)
-				to_repost(son_dy_id)
-				to_follow(j['desc']['uid'])
-				already_dynamic_id.append(son_dy_id)
-				dynamic_redis.save_dynamic(son_dy_id)
+				if to_comment(1,son_dy_id,True):
+					to_repost(son_dy_id)
+					to_follow(j['desc']['uid'])
+					already_dynamic_id.append(son_dy_id)
+					dynamic_redis.save_dynamic(son_dy_id)
 				print()
 	print("*****子动态结束*****\n\n")
 
@@ -162,7 +166,7 @@ def get_son_lucky_dy(dy_id):
 def parse_origin_dy(origin):
 	if origin['dynamic_id'] not in already_dynamic_id:
 		print("*************原动态处理开始***************")
-		if to_comment(origin['rid'],origin['dynamic_id'],int(origin['pre_dy_id_str']),origin['type']):
+		if to_comment(origin['rid'],origin['dynamic_id'],int(origin['orig_dy_id_str']),origin['type']):
 			to_follow(origin['uid'])
 			to_thumbsUp(origin['dynamic_id'])
 			# if origin['type']!=8:
@@ -212,7 +216,7 @@ def to_comment(oid,dy_id,not_origin,type=0):
 	if type==8:
 		data_comment.update({"oid":oid,'type':'1','ordering': 'heat'})
 	res=spider_post("https://api.bilibili.com/x/v2/reply/add",data_comment)
-	print("评论"+res['data']['success_toast'])
+	print('评论'+res['data']['success_toast'])
 	return res['data']['success_toast']
 
 
@@ -244,7 +248,6 @@ def main():
 			if dy_id in already_dynamic_id:
 				print("已有")
 				continue
-			get_comment_word(dy_id)
 			result=get_uid_oid(dy_id)
 			if result==1: # 到官方抽奖了
 				official_list.append(dy_id)
@@ -256,18 +259,20 @@ def main():
 				print('*#*#*#*#*#*#*#*#*#*原动态处理失败*#*#*#*#*#*#*#*#*#')
 				continue
 			uid,oid,uname,not_origin=result
-			if to_comment(oid,dy_id,not_origin) and to_repost(dy_id):
-				to_follow(uid)	
-				# to_thumbsUp(dy_id)
-				print(uname+"\n\n")
-				already_dynamic_id.append(dy_id)
-				today_list.append(dy_id)
-				dynamic_redis.save_dynamic(dy_id)
+			if dy_id not in already_dynamic_id:
+				get_comment_word(dy_id,not_origin)		
+				if to_comment(oid,dy_id,not_origin) and to_repost(dy_id):
+					to_follow(uid)	
+					# to_thumbsUp(dy_id)
+					print(uname+"\n\n")
+					already_dynamic_id.append(dy_id)
+					today_list.append(dy_id)
+					dynamic_redis.save_dynamic(dy_id)
 			time.sleep(random.randint(6,11))
 		except Exception as e:
 			print(e)
 
-
+			
 already_dynamic_id=check_dynamic_id()
 if __name__ == '__main__':
 	print("\n\n==============="+datetime.now(timezone('Asia/Shanghai')).strftime('%Y-%m-%d %H:%M')+"===============")
