@@ -212,7 +212,6 @@ def to_comment(oid,dy_id,not_origin,type=0):
 	if type==8:
 		data_comment.update({"oid":oid,'type':'1','ordering': 'heat'})
 	res=spider_post("https://api.bilibili.com/x/v2/reply/add",data_comment)
-	print(res)
 	print('评论'+res['data']['success_toast'])
 	return res['data']['success_toast']
 
@@ -254,7 +253,7 @@ def main(uid):
 				continue
 			if not result:
 				print('*#*#*#*#*#*#*#*#*#*原动态处理失败*#*#*#*#*#*#*#*#*#')
-				break
+				continue
 			uid,oid,uname,not_origin=result
 			if dy_id not in already_dynamic_id:
 				get_comment_word(dy_id,not_origin)		
