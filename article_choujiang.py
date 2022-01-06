@@ -249,18 +249,12 @@ def check_dynamic_id():
 	return dynamic_redis.get_dynamic()
 
 
-def main(uid):
-	if article_id:
-		dys=parse_article_get_dy(article_id)
-	else:
-		dys=action(uid)
+def main(dys):
 	if not dys:
 		print("---开始用户抽奖---")
 # 		os.system('python3 follow.py >> users_lucky.log')
 		print("---结束用户抽奖---")
 		return
-	if uid=="73773270":
-		is_get_son_dy=False
 	for dy_id in dys:
 		try:
 			print('https://t.bilibili.com/',dy_id)
@@ -292,11 +286,24 @@ def main(uid):
 			print(e)
 
 			
+def pre_man():
+	if article_id:
+		dys=parse_article_get_dy(article_id)
+		main(dys)
+		return
+	for i in article_uid:
+		if i=="73773270":
+			is_get_son_dy=False
+		else:
+			is_get_son_dy=True
+		main(action(i))
+
+
+
 already_dynamic_id=check_dynamic_id()
 if __name__ == '__main__':
 	print("\n\n=================================================="+datetime.now(timezone('Asia/Shanghai')).strftime('%Y-%m-%d %H:%M')+"==================================================")
-	for i in article_uid:
-		main(i)
+	pre_man()
 	print("=================================================="+datetime.now(timezone('Asia/Shanghai')).strftime('%Y-%m-%d %H:%M')+"==================================================")
 	if today_list:
 		with open(f'List/{today_filename}.txt', 'w') as f:
