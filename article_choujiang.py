@@ -17,6 +17,8 @@ csrf=os.environ["CSRF"]
 
 is_get_son_dy=True
 
+My_UID="693765874"
+
 article_id=os.environ["article_id"]
 
 article_uid=eval(os.environ["Artice_Uid"])
@@ -50,7 +52,7 @@ data_follow={
 
 
 data_repost={
-	'uid':'32993113',
+	'uid':My_UID,
 	'dynamic_id':'',
 	'content':'我觉得会是我~！',
 	'extension':'{"emoji_type":1}',
@@ -71,7 +73,7 @@ data_comment={
 }
 
 data_thumbsUp={
-	'uid':'32993113',
+	'uid':My_UID,
 	'dynamic_id':'',
 	'up':'1',
 	'csrf_token':csrf,
